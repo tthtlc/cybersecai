@@ -27,7 +27,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan www.cybersecai.cloud >> ~/.ssh/known_hosts
-          rsync -avz --delete _site/ userweb@www.cybersecai.cloud:/home/userweb/webroot
+          rsync -avz --delete dist/ userweb@www.cybersecai.cloud:/home/userweb/webroot
 
 
 
