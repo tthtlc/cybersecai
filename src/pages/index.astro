@@ -8,6 +8,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="en">
 <head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AI Bug Bounty — Home</title>
@@ -69,6 +70,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
   </style>
 </head>
 <body>
+  <Header />
   <div class="mesh" aria-hidden="true"></div>
   <main class="container" role="main">
     <section class="hero" aria-labelledby="title">
