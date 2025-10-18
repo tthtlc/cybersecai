@@ -1,5 +1,5 @@
 ---
-title: '**deep critical analysis “From Prompt to Protocol — How Context Engineering Turns LLMs into Real Agents.”**'
+title: '**Deep critical analysis of “From Prompt to Protocol”**'
 description: '**A critical analysis by ChatGPT**'
 pubDate: 'Oct 18 2025'
 heroImage: '../../assets/blog4.png'
