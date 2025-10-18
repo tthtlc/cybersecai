@@ -5,107 +5,480 @@ import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI Bug Bounty — Home</title>
-  <meta name="description" content="AI & LLM powered bug bounty hunting and pentesting — concise, automated, and research-grade."/>
-  <style>
-    :root{
-      --bg-1:#071029; --bg-2:#08182b; --accent:#6EE7B7; --accent-2:#7C83FC; --glass: rgba(255,255,255,0.06);
-      --card: rgba(255,255,255,0.03);
-      color-scheme: dark;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    html,body{height:100%;margin:0}
-    body{
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,131,252,0.12), transparent),
-                  radial-gradient(900px 400px at 90% 80%, rgba(110,231,183,0.06), transparent),
-                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
-      display:flex;align-items:center;justify-content:center;padding:48px;gap:24px;min-height:100vh;
-      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Particle grid (pure CSS 'mesh') */
-    .mesh{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:0.45}
-    .mesh::before,.mesh::after{content:'';position:absolute;inset:0;background-image:
-      linear-gradient(transparent 24px, rgba(255,255,255,0.02) 25px),
-      linear-gradient(90deg, transparent 24px, rgba(255,255,255,0.02) 25px);
-      background-size:50px 50px;transform:translateZ(0);}
-    .mesh::after{filter:blur(10px);opacity:0.6}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    .container{position:relative;max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:36px}
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
 
-    .hero{backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:40px;border-radius:16px;box-shadow:0 8px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.04)}
+        .grid-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+            animation: scan 4s infinite;
+        }
 
-    h1{margin:0;font-size:clamp(28px,4.4vw,40px);line-height:1.02;font-weight:700;color:linear-gradient(var(--accent),var(--accent-2));}
-    .lead{color:rgba(255,255,255,0.92);font-size:16px;margin:12px 0 20px;max-width:60ch}
+        .grid-line:nth-child(1) { top: 20%; height: 2px; width: 100%; animation-delay: 0s; }
+        .grid-line:nth-child(2) { top: 40%; height: 2px; width: 100%; animation-delay: 1s; }
+        .grid-line:nth-child(3) { top: 60%; height: 2px; width: 100%; animation-delay: 2s; }
+        .grid-line:nth-child(4) { top: 80%; height: 2px; width: 100%; animation-delay: 3s; }
 
-    .features{display:flex;gap:12px;flex-wrap:wrap}
-    .pill{background:var(--card);padding:10px 12px;border-radius:999px;font-weight:600;font-size:13px;color:rgba(255,255,255,0.9);box-shadow:inset 0 -6px 18px rgba(0,0,0,0.35)}
+        @keyframes scan {
+            0% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
 
-    .cta{display:flex;gap:12px;margin-top:20px}
-    .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041023;box-shadow:0 8px 30px rgba(124,131,252,0.18)}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.92)}
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00f0ff;
+            border-radius: 50%;
+            animation: float 6s infinite;
+        }
 
-    /* Right card with CSS 'terminal' + LLM idea bubble */
-    .card{background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02));border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 40px rgba(2,6,23,0.6)}
-    .term{background:linear-gradient(180deg, rgba(2,10,20,0.95), rgba(2,8,16,0.9));padding:14px;border-radius:10px;color:#b8e3cf;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono';font-size:13px;line-height:1.45;}
-    .term .prompt{color:#8be9c2}
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
 
-    /* CSS stylized LLM bubble */
-    .llm-bubble{position:relative;margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(124,131,252,0.12), rgba(110,231,183,0.06));border:1px solid rgba(124,131,252,0.12);font-size:13px;color:rgba(255,255,255,0.95)}
-    .llm-bubble:after{content:'';position:absolute;left:16px;bottom:-8px;width:12px;height:12px;background:linear-gradient(90deg, rgba(124,131,252,0.12), rgba(110,231,183,0.06));transform:rotate(45deg);border-left:1px solid rgba(124,131,252,0.08);border-bottom:1px solid rgba(124,131,252,0.06)}
+        /* Header */
+        header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+        }
 
-    /* small subtle animation */
-    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-    .logo-blob{width:84px;height:84px;border-radius:18px;background:conic-gradient(from 120deg at 50% 50%, var(--accent), var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#041023;font-size:22px;box-shadow:0 10px 30px rgba(124,131,252,0.08);animation:floaty 4s ease-in-out infinite}
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00f0ff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
 
-    /* Responsive */
-    @media (max-width:940px){.container{grid-template-columns:1fr;}.card{order:-1}}
-  </style>
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px #00f0ff); }
+            50% { filter: drop-shadow(0 0 20px #00f0ff); }
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00f0ff;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #00f0ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #00f0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #a0aec0;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            font-size: 18px;
+            color: #fff;
+            background: linear-gradient(135deg, #00f0ff, #0080ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Features Grid */
+        .features {
+            position: relative;
+            z-index: 5;
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff, #00f0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3);
+            border-color: rgba(0, 240, 255, 0.6);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #00f0ff;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            position: relative;
+            z-index: 5;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(0, 128, 255, 0.1));
+            padding: 60px 50px;
+            margin: 80px 0;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: #00f0ff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            color: #a0aec0;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 40px 50px;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 16px;
+            color: #a0aec0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="mesh" aria-hidden="true"></div>
-  <main class="container" role="main">
-    <section class="hero" aria-labelledby="title">
-      <div style="display:flex;align-items:center;gap:18px">
-        <div class="logo-blob" aria-hidden="true">AI</div>
-        <div>
-          <h1 id="title">AI-driven Bug Bounty & Pentesting</h1>
-          <p class="lead">Amplify pentesting with LLM reasoning, automated recon, and exploit-aware pipelines — so researchers find real impact, faster.</p>
-        </div>
-      </div>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+    </div>
 
-      <div class="features" aria-hidden="false" style="margin-top:18px">
-        <span class="pill">LLM-assisted Recon</span>
-        <span class="pill">Exploit Pattern Mining</span>
-        <span class="pill">Automated PoC Synthesis</span>
-        <span class="pill">Knowledge Graphs & CPI</span>
-      </div>
+    <!-- Header -->
+    <header>
+        <div class="logo">⚡ CyberAI</div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#platform">Platform</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-      <div class="cta">
-        <a href="/blog/" class="btn btn-primary">Blog</a>
-        <a href="/about/" class="btn btn-ghost">About</a>
-      </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AI-Powered Cybersecurity Intelligence</h1>
+        <p>Autonomous bug bounty hunting, penetration testing, and vulnerability discovery powered by next-generation LLM technology</p>
+        <a href="#" class="cta-button">Start Free Trial</a>
     </section>
 
-    <aside class="card" aria-label="Quick demo">
-      <div class="term" role="region" aria-label="AI assistant example">
-        <div class="prompt">$ llm-assist --target example.com --scan</div>
-        <div>// Recon: intelligent fingerprinting → prioritized attack surface</div>
-        <div>// Suggest: 3 high-probability vectors (XXE, SSRF, Insecure Auth)</div>
-        <div style="margin-top:8px;opacity:0.9">// PoC: partial payloads and exploit sketch generated</div>
-      </div>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Advanced Security Capabilities</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Autonomous Bug Bounty Hunting</h3>
+                <p>AI-driven vulnerability discovery that automatically identifies and reports security flaws across web applications, APIs, and infrastructure with human-level precision.</p>
+            </div>
 
-      <div class="llm-bubble" aria-hidden="false">
-        "Found a likely SSRF chain linking image upload to internal metadata API — recommend authenticated fuzz with crafted SNI headers."
-      </div>
-    </aside>
-  </main>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Intelligent Penetration Testing</h3>
+                <p>Automated penetration testing that adapts to your environment, simulating advanced persistent threats and providing comprehensive security assessments.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Code Security Analysis</h3>
+                <p>Deep learning models analyze your codebase for security vulnerabilities, insecure patterns, and potential exploits before deployment.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Threat Intelligence</h3>
+                <p>Real-time threat detection and analysis powered by LLMs trained on millions of attack patterns and security incidents.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>API Security Testing</h3>
+                <p>Automated API endpoint discovery, authentication testing, and vulnerability scanning with intelligent fuzzing techniques.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Compliance Monitoring</h3>
+                <p>Continuous compliance assessment for GDPR, SOC 2, HIPAA, and other frameworks with AI-generated remediation recommendations.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Web Application Scanning</h3>
+                <p>Comprehensive scanning for OWASP Top 10, injection attacks, XSS, CSRF, and business logic vulnerabilities.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Access Control Analysis</h3>
+                <p>Intelligent evaluation of authentication mechanisms, authorization flows, and privilege escalation vectors.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Smart Remediation</h3>
+                <p>AI-generated fix recommendations with code examples and prioritized action plans based on risk assessment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>50K+</h3>
+                <p>Vulnerabilities Discovered</p>
+            </div>
+            <div class="stat-item">
+                <h3>99.8%</h3>
+                <p>Detection Accuracy</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Continuous Monitoring</p>
+            </div>
+            <div class="stat-item">
+                <h3>10x</h3>
+                <p>Faster Than Manual Testing</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CyberAI. All rights reserved. Securing the digital future with artificial intelligence.</p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const bgAnimation = document.querySelector('.bg-animation');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
