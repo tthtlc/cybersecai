@@ -1,63 +1,135 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import AboutHeroImage from '../assets/about.jpg';
 import Layout from '../layouts/BlogPost.astro';
 ---
 
-## 🧠 AI-Powered Cybersecurity, Bug Bounty, and Pentesting
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Powered Cybersecurity</title>
+<style>
+  body {
+    font-family: "Inter", Arial, sans-serif;
+    background: radial-gradient(circle at top left, #0a0f1c, #000);
+    color: #e0e6ed;
+    margin: 0;
+    padding: 40px;
+    line-height: 1.7;
+  }
+  h1, h2, h3 {
+    color: #00ffff;
+    letter-spacing: 1px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #00ffff;
+  }
+  section {
+    margin-bottom: 50px;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+  }
+  section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul li::before {
+    content: "⚡";
+    color: #00ffff;
+    margin-right: 10px;
+  }
+  .highlight {
+    color: #00ffff;
+    font-weight: bold;
+  }
+  .cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .cta a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    background: linear-gradient(90deg, #00ffff, #00bcd4);
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00ffff;
+    transition: all 0.3s ease;
+  }
+  .cta a:hover {
+    background: linear-gradient(90deg, #00bcd4, #00ffff);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00ffff;
+  }
+</style>
+</head>
+<body>
 
-### Redefining Offensive Security with Artificial Intelligence
+<h1>🧠 AI-Powered Cybersecurity, Bug Bounty & Pentesting</h1>
 
-Welcome to **[Your Brand Name]**, where **artificial intelligence meets ethical hacking**.
-We harness **Large Language Models (LLMs)**, advanced **machine learning pipelines**, and **automated exploit intelligence** to **revolutionize vulnerability research, penetration testing, and bug bounty operations**.
+<section>
+  <h2>🔹 Introduction</h2>
+  <ul>
+    <li>Welcome to <span class="highlight">[Your Brand Name]</span> — where <span class="highlight">AI meets ethical hacking</span>.</li>
+    <li>We leverage <span class="highlight">Large Language Models (LLMs)</span> and <span class="highlight">automated exploit intelligence</span> to revolutionize vulnerability research and pentesting.</li>
+    <li>Our goal: <span class="highlight">augment human hacker intuition</span> for faster reconnaissance, smarter exploits, and adaptive defense validation.</li>
+  </ul>
+</section>
 
-In an age of rapidly evolving threats, traditional security testing struggles to keep pace.
-Our mission is to build a next-generation security ecosystem where **AI augments the hacker’s intuition** — enabling faster reconnaissance, smarter exploit generation, and automated defense validation.
+<section>
+  <h2>🔍 What We Do</h2>
+  <ul>
+    <li><span class="highlight">AI-Augmented Pentesting</span>: LLM-driven reconnaissance, intelligent fuzzing, and exploit reasoning for scalable vulnerability detection.</li>
+    <li><span class="highlight">Automated Bug Bounty Intelligence</span>: Aggregate and analyze CVEs, PoCs, and bounty reports using AI-based vulnerability prediction.</li>
+    <li><span class="highlight">Security Copilot</span>: An interactive LLM trained on public pentests and exploit data to assist researchers and auditors.</li>
+    <li><span class="highlight">Adversarial AI Research</span>: Analyze prompt injection, model inversion, and data poisoning to secure AI systems themselves.</li>
+  </ul>
+</section>
 
----
+<section>
+  <h2>⚙️ Our Technology Stack</h2>
+  <ul>
+    <li><span class="highlight">LLM Orchestration</span>: LangChain / Semantic Kernel for multi-step exploit reasoning.</li>
+    <li><span class="highlight">Threat Intelligence</span>: Integration with MISP, VirusTotal, ExploitDB, Shodan APIs.</li>
+    <li><span class="highlight">Automated Enumeration</span>: AI-driven fingerprinting and vulnerability correlation.</li>
+    <li><span class="highlight">Knowledge Graphs</span>: GraphDB + embeddings for vulnerability mapping.</li>
+    <li><span class="highlight">Continuous Learning</span>: Reinforcement pipelines evolving from real bug bounty findings.</li>
+  </ul>
+</section>
 
-### 🔍 What We Do
+<section>
+  <h2>🚀 Our Vision</h2>
+  <ul>
+    <li>Develop a <span class="highlight">fully autonomous red teaming framework</span> powered by LLMs.</li>
+    <li>Enable continuous discovery, validation, and reporting of vulnerabilities with <span class="highlight">machine precision</span> and <span class="highlight">human creativity</span>.</li>
+    <li>Amplify — not replace — human hackers by merging intuition with AI-driven scale and reasoning.</li>
+  </ul>
+</section>
 
-**AI-Augmented Pentesting**
-Leverage LLM-driven reconnaissance, intelligent fuzzing, and exploit reasoning to uncover vulnerabilities at scale.
-From static code analysis to dynamic application testing, our AI agents continuously learn from real-world vulnerabilities and adapt to new targets.
+<section>
+  <h2>💡 Join the Revolution</h2>
+  <ul>
+    <li>Open to <span class="highlight">bug bounty hunters</span>, <span class="highlight">researchers</span>, and <span class="highlight">CISOs</span>.</li>
+    <li>Explore how <span class="highlight">AI-driven offensive security</span> transforms threat discovery and defense readiness.</li>
+  </ul>
+  <div class="cta">
+    <a href="#">→ Start Exploring the Future of Hacking with AI</a>
+  </div>
+</section>
 
-**Automated Bug Bounty Intelligence**
-Aggregate, prioritize, and analyze disclosed CVEs, bug bounty reports, and exploit PoCs.
-Our models extract attack patterns, build knowledge graphs of vulnerabilities, and predict exploitable components before attackers do.
+</body>
+</html>
 
-**Security Copilot for Researchers**
-An interactive LLM-based assistant trained on thousands of public pentests, exploit databases, and source code repositories — built to accelerate your research workflow, code auditing, and payload development.
-
-**Adversarial AI Research**
-We explore how AI models themselves can become targets — analyzing prompt injection, model inversion, and data poisoning attacks — ensuring both offensive and defensive resilience.
-
----
-
-### ⚙️ Our Technology Stack
-
-* **LLM Orchestration**: LangChain / Semantic Kernel for multi-step reasoning and contextual exploitation analysis
-* **Threat Intelligence Integration**: MISP, VirusTotal, ExploitDB, and Shodan APIs
-* **Automated Enumeration**: AI-driven fingerprinting and vulnerability correlation
-* **Knowledge Graphs**: GraphDB + vector embeddings for vulnerability relationship mapping
-* **Continuous Learning**: Reinforcement pipelines that evolve from past bug bounty findings
-
----
-
-### 🚀 Our Vision
-
-To create a **fully autonomous red teaming framework** powered by LLMs —
-one that continuously discovers, validates, and reports vulnerabilities with **machine-level precision** and **human-level creativity**.
-
-We believe the future of cybersecurity lies not in replacing human hackers, but in **amplifying them** —
-combining human intuition with AI’s capacity for scale, speed, and reasoning.
-
----
-
-### 💡 Join the Revolution
-
-Whether you’re a **bug bounty hunter**, **security researcher**, or **CISO** —
-we invite you to explore how **AI-driven offensive security** can transform your organization’s approach to threat discovery.
-
-**→ Start Exploring the Future of Hacking with AI**
-
----
