@@ -2,6 +2,7 @@
 title: 'XBOW: autonomous AI-powered penetration testing agent'
 description: 'CAI: An Open, Bug Bounty-Ready Cybersecurity AI'
 pubDate: 'Oct 10 2025'
+heroImage: '../../assets/blog1.jpg'
 ---
 
 XBOW is an autonomous AI-powered penetration testing agent recognized for its human-level capability in vulnerability research, particularly as demonstrated on the HackerOne bug bounty platform. Its feature set and architecture enable it to autonomously discover, analyze, and exploit complex vulnerabilities, matching and often exceeding skilled human researchers in speed and effectiveness. Below is a comprehensive, reference-cited breakdown of XBOW’s capabilities and their technical details.[^1_1][^1_2][^1_3][^1_4][^1_5][^1_6][^1_7][^1_8]
