@@ -5,70 +5,45 @@ import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-
-Here’s a professional, technically credible **homepage introduction** for a website focused on **using AI and LLMs for cybersecurity, bug bounty hunting, and penetration testing**.
-
----
-
-## 🧠 AI-Powered Cybersecurity, Bug Bounty, and Pentesting
-
-### Redefining Offensive Security with Artificial Intelligence
-
-Welcome to **[Your Brand Name]**, where **artificial intelligence meets ethical hacking**.
-We harness **Large Language Models (LLMs)**, advanced **machine learning pipelines**, and **automated exploit intelligence** to **revolutionize vulnerability research, penetration testing, and bug bounty operations**.
-
-In an age of rapidly evolving threats, traditional security testing struggles to keep pace.
-Our mission is to build a next-generation security ecosystem where **AI augments the hacker’s intuition** — enabling faster reconnaissance, smarter exploit generation, and automated defense validation.
-
----
-
-### 🔍 What We Do
-
-**AI-Augmented Pentesting**
-Leverage LLM-driven reconnaissance, intelligent fuzzing, and exploit reasoning to uncover vulnerabilities at scale.
-From static code analysis to dynamic application testing, our AI agents continuously learn from real-world vulnerabilities and adapt to new targets.
-
-**Automated Bug Bounty Intelligence**
-Aggregate, prioritize, and analyze disclosed CVEs, bug bounty reports, and exploit PoCs.
-Our models extract attack patterns, build knowledge graphs of vulnerabilities, and predict exploitable components before attackers do.
-
-**Security Copilot for Researchers**
-An interactive LLM-based assistant trained on thousands of public pentests, exploit databases, and source code repositories — built to accelerate your research workflow, code auditing, and payload development.
-
-**Adversarial AI Research**
-We explore how AI models themselves can become targets — analyzing prompt injection, model inversion, and data poisoning attacks — ensuring both offensive and defensive resilience.
-
----
-
-### ⚙️ Our Technology Stack
-
-* **LLM Orchestration**: LangChain / Semantic Kernel for multi-step reasoning and contextual exploitation analysis
-* **Threat Intelligence Integration**: MISP, VirusTotal, ExploitDB, and Shodan APIs
-* **Automated Enumeration**: AI-driven fingerprinting and vulnerability correlation
-* **Knowledge Graphs**: GraphDB + vector embeddings for vulnerability relationship mapping
-* **Continuous Learning**: Reinforcement pipelines that evolve from past bug bounty findings
-
----
-
-### 🚀 Our Vision
-
-To create a **fully autonomous red teaming framework** powered by LLMs —
-one that continuously discovers, validates, and reports vulnerabilities with **machine-level precision** and **human-level creativity**.
-
-We believe the future of cybersecurity lies not in replacing human hackers, but in **amplifying them** —
-combining human intuition with AI’s capacity for scale, speed, and reasoning.
-
----
-
-### 💡 Join the Revolution
-
-Whether you’re a **bug bounty hunter**, **security researcher**, or **CISO** —
-we invite you to explore how **AI-driven offensive security** can transform your organization’s approach to threat discovery.
-
-**→ Start Exploring the Future of Hacking with AI**
-
----
-
-Would you like me to tailor this page for a **specific type of audience** (e.g., enterprise clients, researchers, or the hacker community),
-or would you like it written in a **more marketing / more technical** tone (for example, including references to GPT-based code reasoning, LLM-powered SAST/DAST pipelines, etc.)?
-
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+			<p>
+				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
+				template serves as a lightweight, minimally-styled starting point for anyone looking to build
+				a personal website, blog, or portfolio with Astro.
+			</p>
+			<p>
+				This template comes with a few integrations already configured in your
+				<code>astro.config.mjs</code> file. You can customize your setup with
+				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
+				React, or Vue to your project.
+			</p>
+			<p>Here are a few ideas on how to get started with the template:</p>
+			<ul>
+				<li>Edit this page in <code>src/pages/index.astro</code></li>
+				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
+				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
+				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
+				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
+			</ul>
+			<p>
+				Have fun! If you get stuck, remember to
+				<a href="https://docs.astro.build/">read the docs</a>
+				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+			</p>
+			<p>
+				Looking for a blog template with a bit more personality? Check out
+				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
+				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
