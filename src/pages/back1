@@ -7,43 +7,104 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Bug Bounty — Home</title>
+  <meta name="description" content="AI & LLM powered bug bounty hunting and pentesting — concise, automated, and research-grade."/>
+  <style>
+    :root{
+      --bg-1:#071029; --bg-2:#08182b; --accent:#6EE7B7; --accent-2:#7C83FC; --glass: rgba(255,255,255,0.06);
+      --card: rgba(255,255,255,0.03);
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,131,252,0.12), transparent),
+                  radial-gradient(900px 400px at 90% 80%, rgba(110,231,183,0.06), transparent),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      display:flex;align-items:center;justify-content:center;padding:48px;gap:24px;min-height:100vh;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    }
+
+    .mesh{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:0.45}
+    .mesh::before,.mesh::after{content:'';position:absolute;inset:0;background-image:
+      linear-gradient(transparent 24px, rgba(255,255,255,0.02) 25px),
+      linear-gradient(90deg, transparent 24px, rgba(255,255,255,0.02) 25px);
+      background-size:50px 50px;transform:translateZ(0);}
+    .mesh::after{filter:blur(10px);opacity:0.6}
+
+    .container{position:relative;max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:36px}
+
+    .hero{backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:40px;border-radius:16px;box-shadow:0 8px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.04)}
+
+    h1{margin:0;font-size:clamp(28px,4.4vw,40px);line-height:1.02;font-weight:700;color:linear-gradient(var(--accent),var(--accent-2));}
+    .lead{color:rgba(255,255,255,0.92);font-size:16px;margin:12px 0 20px;max-width:60ch}
+
+    .features{display:flex;gap:12px;flex-wrap:wrap}
+    .pill{background:var(--card);padding:10px 12px;border-radius:999px;font-weight:600;font-size:13px;color:rgba(255,255,255,0.9);box-shadow:inset 0 -6px 18px rgba(0,0,0,0.35)}
+
+    .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;transition:all 0.2s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041023;box-shadow:0 8px 30px rgba(124,131,252,0.18)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.92)}
+
+    .card{background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02));border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+    .term{background:linear-gradient(180deg, rgba(2,10,20,0.95), rgba(2,8,16,0.9));padding:14px;border-radius:10px;color:#b8e3cf;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono';font-size:13px;line-height:1.45;}
+    .term .prompt{color:#8be9c2}
+
+    .llm-bubble{position:relative;margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(124,131,252,0.12), rgba(110,231,183,0.06));border:1px solid rgba(124,131,252,0.12);font-size:13px;color:rgba(255,255,255,0.95)}
+    .llm-bubble:after{content:'';position:absolute;left:16px;bottom:-8px;width:12px;height:12px;background:linear-gradient(90deg, rgba(124,131,252,0.12), rgba(110,231,183,0.06));transform:rotate(45deg);border-left:1px solid rgba(124,131,252,0.08);border-bottom:1px solid rgba(124,131,252,0.06)}
+
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    .logo-blob{width:84px;height:84px;border-radius:18px;background:conic-gradient(from 120deg at 50% 50%, var(--accent), var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#041023;font-size:22px;box-shadow:0 10px 30px rgba(124,131,252,0.08);animation:floaty 4s ease-in-out infinite}
+
+    .nav-links{margin-top:24px;display:flex;gap:16px;flex-wrap:wrap}
+    .nav-links a{color:var(--accent);text-decoration:none;font-weight:600;font-size:14px;opacity:0.9;transition:opacity 0.2s ease}
+    .nav-links a:hover{opacity:1;text-decoration:underline}
+
+    @media (max-width:940px){.container{grid-template-columns:1fr;}.card{order:-1}}
+  </style>
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"></div>
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="title">
+      <div style="display:flex;align-items:center;gap:18px">
+        <div class="logo-blob" aria-hidden="true">AI</div>
+        <div>
+          <h1 id="title">AI-driven Bug Bounty & Pentesting</h1>
+          <p class="lead">Amplify pentesting with LLM reasoning, automated recon, and exploit-aware pipelines — so researchers find real impact, faster.</p>
+        </div>
+      </div>
+
+      <div class="features" style="margin-top:18px">
+        <span class="pill">LLM-assisted Recon</span>
+        <span class="pill">Exploit Pattern Mining</span>
+        <span class="pill">Automated PoC Synthesis</span>
+        <span class="pill">Knowledge Graphs & CPI</span>
+      </div>
+
+      <div class="cta">
+        <a href="/blog/" class="btn btn-primary">Blog</a>
+        <a href="/about/" class="btn btn-ghost">About</a>
+      </div>
+
+    </section>
+
+    <aside class="card" aria-label="Quick demo">
+      <div class="term" role="region" aria-label="AI assistant example">
+        <div class="prompt">$ llm-assist --target example.com --scan</div>
+        <div>// Recon: intelligent fingerprinting → prioritized attack surface</div>
+        <div>// Suggest: 3 high-probability vectors (XXE, SSRF, Insecure Auth)</div>
+        <div style="margin-top:8px;opacity:0.9">// PoC: partial payloads and exploit sketch generated</div>
+      </div>
+
+      <div class="llm-bubble">"Found a likely SSRF chain linking image upload to internal metadata API — recommend authenticated fuzz with crafted SNI headers."</div>
+    </aside>
+  </main>
+</body>
 </html>
