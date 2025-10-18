@@ -2,7 +2,7 @@
 title: '**deep critical analysis “From Prompt to Protocol — How Context Engineering Turns LLMs into Real Agents.”**'
 description: '**A critical analysis by ChatGPT**'
 pubDate: 'Oct 18 2025'
-heroImage: '../../assets/blog4.jpg'
+heroImage: '../../assets/blog4.png'
 ---
 
 I’ll evaluate it through four lenses:
