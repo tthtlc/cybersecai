@@ -12,7 +12,7 @@ import HeaderLink from './HeaderLink.astro';
 				<HeaderLink href="/blog">Blog</HeaderLink>
 				<HeaderLink href="/about">About</HeaderLink>
 			</div>
-			<a href="/discussion" class="discussion-link" target="_blank" rel="noopener noreferrer">Discussion</a>
+			<a href="#" class="discussion-link" onclick="window.open(location.protocol+'//'+location.hostname+':9090/discussion','_blank');return false;" rel="noopener noreferrer">Discussion</a>
 		</div>
 	</nav>
 </header>
