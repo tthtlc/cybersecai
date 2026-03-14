@@ -49,22 +49,33 @@ const posts = (await getCollection('blog')).sort(
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
+				border: 1px solid rgba(0, 240, 255, 0.15);
 			}
 			ul li a {
 				display: block;
+				padding: 1em;
+				border-radius: 12px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(0, 240, 255, 0.1);
+				transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+			}
+			ul li a:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+				border-color: rgba(0, 240, 255, 0.4);
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: #e0e8f0;
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: #a0aec0;
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+				color: #00f0ff;
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);

@@ -6,10 +6,13 @@ import HeaderLink from './HeaderLink.astro';
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+		<div class="nav-links">
+			<div class="internal-links">
+				<HeaderLink href="/">Home</HeaderLink>
+				<HeaderLink href="/blog">Blog</HeaderLink>
+				<HeaderLink href="/about">About</HeaderLink>
+			</div>
+			<a href="https://cybersecai.cloud:8080" class="discussion-link" target="_blank" rel="noopener noreferrer">Discussion</a>
 		</div>
 	</nav>
 </header>
@@ -17,40 +20,66 @@ import HeaderLink from './HeaderLink.astro';
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		background: rgba(10, 14, 39, 0.8);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgba(0, 240, 255, 0.15);
 	}
 	h2 {
 		margin: 0;
 		font-size: 1em;
 	}
-
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
+		background: linear-gradient(135deg, #00f0ff, #0080ff);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+	}
 	nav a {
 		padding: 1em 0.5em;
-		color: var(--black);
+		color: #e0e6ed;
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		transition: color 0.3s;
+	}
+	nav a:hover {
+		color: #00f0ff;
 	}
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+		color: #00f0ff;
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
+	.discussion-link {
+		padding: 0.5em 1.2em !important;
+		background: linear-gradient(135deg, #00f0ff, #0080ff);
+		color: #0a0e27 !important;
+		border-radius: 20px;
+		font-weight: bold;
+		font-size: 0.85em;
+		border-bottom: none !important;
+		transition: transform 0.3s, box-shadow 0.3s !important;
+	}
+	.discussion-link:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+		color: #0a0e27 !important;
 	}
 	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+		.nav-links {
+			flex-direction: column;
+			gap: 0.5em;
 		}
 	}
 </style>

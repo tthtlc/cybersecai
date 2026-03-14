@@ -128,6 +128,26 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
             color: #00f0ff;
         }
 
+        nav .discussion-link {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #00f0ff, #0080ff);
+            color: #0a0e27;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        nav .discussion-link::after {
+            display: none;
+        }
+
+        nav .discussion-link:hover {
+            color: #0a0e27;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+        }
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -331,6 +351,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
             <a href="/blog/">Blog</a>
             <a href="/about/">About</a>
             <a href="#contact">Contact</a>
+            <a href="https://cybersecai.cloud:8080" class="discussion-link" target="_blank" rel="noopener noreferrer">Discussion</a>
         </nav>
     </header>
 
