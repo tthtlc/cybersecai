@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const issues = (await getCollection('newsletter')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Newsletter — ${SITE_TITLE}`} description="Security intelligence newsletters covering CVEs, detection engineering, and defensive research." />
+		<style>
+			main {
+				width: 960px;
+			}
+			.page-header {
+				margin-bottom: 2rem;
+			}
+			.page-header h1 {
+				font-size: 2rem;
+				background: linear-gradient(135deg, #00f0ff, #0080ff);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				margin-bottom: 0.5rem;
+			}
+			.page-header p {
+				color: #a0aec0;
+			}
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+			}
+			ul li a {
+				display: block;
+				padding: 1.5em;
+				border-radius: 12px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(0, 240, 255, 0.1);
+				text-decoration: none;
+				transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+			}
+			ul li a:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+				border-color: rgba(0, 240, 255, 0.4);
+			}
+			.issue-meta {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 0.5rem;
+			}
+			.issue-badge {
+				font-size: 0.75em;
+				padding: 0.2em 0.7em;
+				background: rgba(0, 240, 255, 0.1);
+				border: 1px solid rgba(0, 240, 255, 0.3);
+				border-radius: 20px;
+				color: #00f0ff;
+				font-weight: bold;
+				white-space: nowrap;
+			}
+			.topic-badge {
+				font-size: 0.75em;
+				padding: 0.2em 0.7em;
+				background: rgba(0, 128, 255, 0.1);
+				border: 1px solid rgba(0, 128, 255, 0.3);
+				border-radius: 20px;
+				color: #60b0ff;
+				white-space: nowrap;
+			}
+			.title {
+				margin: 0 0 0.4rem;
+				color: #e0e8f0;
+				font-size: 1.2rem;
+				line-height: 1.3;
+			}
+			.description {
+				margin: 0 0 0.5rem;
+				color: #a0aec0;
+				font-size: 0.9em;
+				line-height: 1.5;
+			}
+			.date {
+				color: #6b7a8d;
+				font-size: 0.85em;
+			}
+			ul li a:hover .title,
+			ul li a:hover .date {
+				color: #00f0ff;
+			}
+			@media (max-width: 720px) {
+				main {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1>Newsletter</h1>
+				<p>Security intelligence issues covering CVEs, detection engineering, and defensive research.</p>
+			</div>
+			<ul>
+				{
+					issues.map((issue) => (
+						<li>
+							<a href={`/newsletter/${issue.id}/`}>
+								<div class="issue-meta">
+									{issue.data.issue && <span class="issue-badge">Issue #{issue.data.issue}</span>}
+									{issue.data.topic && <span class="topic-badge">{issue.data.topic}</span>}
+								</div>
+								<h2 class="title">{issue.data.title}</h2>
+								<p class="description">{issue.data.description}</p>
+								<p class="date">
+									<FormattedDate date={issue.data.pubDate} />
+								</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
